@@ -6,7 +6,7 @@ on:
     branches:
       - main
     paths:
-      - "terraform/**"
+      - "**.tf"
       - ".github/workflows/terraform-deploy.yml"
 
 permissions:
@@ -15,75 +15,70 @@ permissions:
 
 env:
   AWS_REGION: us-east-1
-  TF_WORKING_DIR: terraform
 
 jobs:
   terraform:
     name: Deploy Infrastructure
     runs-on: ubuntu-latest
 
-    defaults:
-      run:
-        working-directory: ${{ env.TF_WORKING_DIR }}
-
     steps:
 
-    #################################################
+    ########################################
     # Checkout repo
-    #################################################
+    ########################################
     - name: Checkout repository
       uses: actions/checkout@v4
 
-    #################################################
+    ########################################
     # Configure AWS credentials (OIDC)
-    #################################################
+    ########################################
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
         role-to-assume: arn:aws:iam::227224898353:role/dev-ecs_fargate
         aws-region: ${{ env.AWS_REGION }}
 
-    #################################################
+    ########################################
     # Install Terraform
-    #################################################
+    ########################################
     - name: Setup Terraform
       uses: hashicorp/setup-terraform@v3
 
-    #################################################
+    ########################################
     # Terraform Init
-    #################################################
+    ########################################
     - name: Terraform Init
       run: terraform init
 
-    #################################################
+    ########################################
     # Terraform Validate
-    #################################################
+    ########################################
     - name: Terraform Validate
       run: terraform validate
 
-    #################################################
+    ########################################
     # Terraform Plan
-    #################################################
+    ########################################
     - name: Terraform Plan
       run: terraform plan -out=tfplan
 
-    #################################################
+    ########################################
     # Terraform Apply
-    #################################################
+    ########################################
     - name: Terraform Apply
       run: terraform apply -auto-approve tfplan
 
-    #################################################
+    ########################################
     # Export Terraform Outputs
-    #################################################
+    ########################################
     - name: Export Terraform outputs
       run: |
         echo "ALB_DNS=$(terraform output -raw alb_dns_name)" >> $GITHUB_ENV
         echo "ECS_SERVICE=$(terraform output -raw ecs_service_name)" >> $GITHUB_ENV
 
-    #################################################
+    ########################################
     # Show Infrastructure Info
-    #################################################
+    ########################################
     - name: Show deployed infrastructure
       run: |
         echo "======================================"
