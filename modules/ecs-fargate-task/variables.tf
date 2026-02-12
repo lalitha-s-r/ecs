@@ -1,48 +1,83 @@
-variable "cluster_name" {}
-variable "task_family" {}
+variable "cluster_name" {
+  description = "Name of the ECS cluster"
+  type        = string
+}
 
-variable "network_mode" {
-  default = "awsvpc"
+variable "task_family" {
+  description = "Task definition family name"
+  type        = string
 }
 
 variable "cpu" {
-  default = 256
+  description = "Task CPU units"
+  type        = number
+  default     = 512
 }
 
 variable "memory" {
-  default = 512
+  description = "Task memory (MB)"
+  type        = number
+  default     = 1024
 }
 
 variable "execution_role" {
   description = "IAM execution role ARN for ECS task execution"
+  type        = string
+}
+
+variable "task_role" {
+  description = "IAM task role ARN"
+  type        = string
 }
 
 variable "enable_service" {
-  type    = bool
-  default = false
+  description = "Whether to create ECS service"
+  type        = bool
+  default     = false
 }
 
 variable "desired_count" {
-  default = 1
+  description = "Initial number of tasks"
+  type        = number
+  default     = 1
 }
 
-variable "container_name" {}
-variable "containerPort" {}
-variable "container_protocol" {}
-variable "container_image" {}
-
-variable "cidr_block" {
-  default = "10.0.0.0/24"
+variable "container_name" {
+  description = "Container name"
+  type        = string
 }
 
-variable "public_cidr_block" {
-  default = "10.0.0.0/28"
+variable "containerPort" {
+  description = "Container port"
+  type        = number
 }
 
-variable "availability_zone" {
-  default = "us-east-1a"
+variable "container_protocol" {
+  description = "Container protocol"
+  type        = string
+}
+
+variable "container_image" {
+  description = "Container image URI"
+  type        = string
 }
 
 variable "region" {
-  default = "us-east-1"
+  description = "AWS region"
+  type        = string
+}
+
+variable "target_group_arn" {
+  description = "ALB target group ARN"
+  type        = string
+}
+
+variable "subnet_ids" {
+  description = "Subnets for ECS service"
+  type        = list(string)
+}
+
+variable "security_group_id" {
+  description = "Security group for ECS tasks"
+  type        = string
 }
