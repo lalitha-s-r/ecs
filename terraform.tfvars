@@ -10,6 +10,7 @@ container_port      = 8080
 
 ecr_repo_name       = "ecs-fargate"
 
+region = "us-east-1"
 vpc_cidr       = "10.0.0.0/16"
 
 public_cidr_1  = "10.0.10.0/24"

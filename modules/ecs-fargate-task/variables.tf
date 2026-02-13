@@ -17,7 +17,7 @@ variable "cpu" {
 variable "memory" {
   description = "Task memory (MB)"
   type        = number
-  default     = 1024
+  default     = 4096
 }
 
 variable "execution_role" {
