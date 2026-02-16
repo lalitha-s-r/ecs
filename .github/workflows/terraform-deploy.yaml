@@ -73,7 +73,7 @@ jobs:
     ########################################
     - name: Export Terraform outputs
       run: |
-        echo "ALB_DNS=$(terraform output -raw alb_dns_name)" >> $GITHUB_ENV
+        echo "ALB_DNS=$(terraform output -raw alb_dns)" >> $GITHUB_ENV
         echo "ECS_SERVICE=$(terraform output -raw ecs_service_name)" >> $GITHUB_ENV
 
     ########################################
