@@ -18,7 +18,7 @@ env:
 
 jobs:
   terraform:
-    name: Deploy Infrastructure
+    name: Deploy Infrastructure                                                                                                                                        
     runs-on: ubuntu-latest
 
     steps:
