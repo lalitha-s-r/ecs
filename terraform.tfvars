@@ -4,11 +4,12 @@ task_family         = "fargate-ecs"
 execution_role_arn  = "arn:aws:iam::227224898353:role/dev-ecstaskexecution"
 task_role_arn       = "arn:aws:iam::227224898353:role/dev-ecs-task-role-with-observability"
 
-container_name      = "fargate1"
+container_name      = "fargate-1"
 container_protocol  = "tcp"
 container_port      = 8080
 
 ecr_repo_name       = "ecs-fargate"
+
 
 region = "us-east-1"
 vpc_cidr       = "10.0.0.0/16"

@@ -46,7 +46,7 @@ module "ecs_fargate_task" {
   enable_service = true
   desired_count  = 1
 
-  container_image    = "${module.ecr.repository_url}:latest"
+  container_image = "${module.ecr.repository_url}:latest"
   container_name     = var.container_name
   containerPort      = var.container_port
   container_protocol = var.container_protocol

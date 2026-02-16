@@ -27,9 +27,9 @@ resource "aws_ecs_task_definition" "this" {
   depends_on = [aws_cloudwatch_log_group.ecs]
   container_definitions = templatefile("${path.module}/task_container_def.json", {
     container_image    = var.container_image
-    container_name     = var.container_name
-    containerPort      = var.containerPort
-    container_protocol = var.container_protocol
+    container_name     = "fargate-1"
+    containerPort      = 8080
+    container_protocol = "http"
     log_group          = "/ecs/${var.task_family}"
     region             = var.region
   })
@@ -51,8 +51,8 @@ resource "aws_ecs_service" "this" {
 
   load_balancer {
     target_group_arn = var.target_group_arn
-    container_name   = var.container_name
-    container_port   = var.containerPort
+    container_name   = "fargate-1"
+    container_port   = 8080
   }
 
   capacity_provider_strategy {

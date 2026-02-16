@@ -35,7 +35,7 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v4
       with:
-        role-to-assume: arn:aws:iam::227224898353:role/dev-ecs_fargate
+        role-to-assume: arn:aws:iam::227224898353:role/dev-ecs_fargate1
         aws-region: ${{ env.AWS_REGION }}
 
     ########################################

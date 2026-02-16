@@ -9,6 +9,7 @@ variable "execution_role_arn" {}
 variable "task_role_arn" {}
 
 variable "ecr_repo_name" {}
+
 variable "vpc_cidr" {}
 
 variable "public_cidr_1" {}

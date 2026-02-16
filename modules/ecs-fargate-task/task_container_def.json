@@ -1,12 +1,12 @@
 [
   {
-    "name": "${container_name}",
+    "name": "fargate-1",
     "image": "${container_image}",
     "essential": true,
     "portMappings": [
       {
         "containerPort": 8080,
-        "protocol": "${container_protocol}"
+        "protocol": "tcp"
       }
     ],
     "logConfiguration": {
@@ -17,42 +17,6 @@
         "awslogs-stream-prefix": "app"
       }
     }
-  },
-  {
-    "name": "xray-daemon",
-    "image": "amazon/aws-xray-daemon",
-    "essential": false,
-    "cpu": 32,
-    "memory": 256,
-    "portMappings": [
-      {
-        "containerPort": 2000,
-        "protocol": "udp"
-      }
-    ],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "${log_group}",
-        "awslogs-region": "${region}",
-        "awslogs-stream-prefix": "xray"
-      }
-    }
-  },
-  {
-    "name": "aws-otel-collector",
-    "image": "amazon/aws-otel-collector:latest",
-    "essential": false,
-    "cpu": 32,
-    "memory": 256,
-    "command": ["--config=/etc/ecs/ecs-cloudwatch.yaml"],
-    "logConfiguration": {
-      "logDriver": "awslogs",
-      "options": {
-        "awslogs-group": "${log_group}",
-        "awslogs-region": "${region}",
-        "awslogs-stream-prefix": "otel"
-      }
-    }
   }
+
 ]
